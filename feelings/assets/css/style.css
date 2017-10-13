@@ -1,6 +1,9 @@
-.content {
-margin-top : 100px;
+body{
+padding-top:80px;
 }
 .signinbutton{
 margin-right: 10px;
+}
+.modal-backdrop{
+position:inherit;
 }
