@@ -1,14 +1,40 @@
 {% extends 'layout.html' %}
 {% load thought_tags %}
-
+{% load static from staticfiles %}
 {% block title %}Dashboard| {{ block.super }} {% endblock %}
 
 {% block content %}
-
-<h3 class="text-center">Dashboard</h3>
-{% if user.is_authenticated %}
-{% thought_form %}
-{% else %}
-<h4><strong>Please Login or Sign Up to access.</strong></h4>
-{% endif %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-8">
+            <h4><strong>Recent thoughts</strong></h4>
+            <hr>
+            <div class="list-group">
+                {% for thought in user.thoughts.all %}
+                <div class="list-group-item" style="margin-top:5px;">
+                    <h5><strong>{{ thought.get_condition_display }}</strong></h5>
+                    <time class="float-right small" datetime="{{ thought.recorded_at }}">
+                        {{ thought.recorded_at|date:"SHORT_DATE_FORMAT" }}
+                    </time>
+                    <hr>
+                    {% if thought.notes %}
+                    <p>{{ thought.notes|linebreaks }}</p>
+                    {% endif %}
+                    <small class="float-right">posted_by: {{ user }}</small>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col-md-4">
+            {% if user.is_authenticated %}
+            {% thought_form %}
+            {% else %}
+            <h4><strong>Please Login or Sign Up to access.</strong></h4>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block js %}
+<script src="{% static 'js/stretchy.js' %}" data-filter="#id_notes" async></script>
 {% endblock %}

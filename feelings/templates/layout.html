@@ -27,15 +27,15 @@
                 </li>
                 <li class="nav-item active">
                     {% if not user.is_authenticated %}
-                    <button type="button" class="btn btn-primary sindexpad" data-toggle="modal"
+                    <button type="button" class="btn btn-outline-success btn-md signinbutton" data-toggle="modal"
                             data-target="#exampleModal">
                         Dashboard
                     </button>
-                    <span style="color:white;">Please log in.</span>
                     {% else %}
 
-                    <a href="{% url 'users:dashboard' %}" class="btn btn-primary">Dashboard</a>
-                    <span style="color:white;">  u_name: {{ user.get_username }}  staff: {{ user.is_staff }}</span>
+                    <a href="{% url 'users:dashboard' %}"
+                       class="btn btn-outline-success btn-md signinbutton">Dashboard</a>
+                    <span style="color:white;"> staff: {{ user.is_staff }}</span>
                     {% endif %}
 
                     <!-- Modal -->
@@ -69,9 +69,6 @@
                 Log In
             </a>
             {% else %}
-            <a href="#" class="btn btn-outline-success btn-md signinbutton">
-                Record
-            </a>
             <a href="{% url 'users:logout'%}?next={% url 'home' %}" class="btn btn-light btn-sm">Log Out</a>
             {% endif %}
         </div>
@@ -94,5 +91,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"
         integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
         crossorigin="anonymous"></script>
+{% block js %}
+{% endblock %}
 </body>
 </html>
