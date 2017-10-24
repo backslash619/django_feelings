@@ -31,9 +31,13 @@
                             data-target="#exampleModal">
                         Dashboard
                     </button>
+                    <span style="color:white;">Please log in.</span>
                     {% else %}
+
                     <a href="{% url 'users:dashboard' %}" class="btn btn-primary">Dashboard</a>
+                    <span style="color:white;">  u_name: {{ user.get_username }}  staff: {{ user.is_staff }}</span>
                     {% endif %}
+
                     <!-- Modal -->
                     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
                          aria-labelledby="exampleModalLabel" aria-hidden="true">

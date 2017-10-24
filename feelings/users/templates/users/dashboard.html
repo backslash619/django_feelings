@@ -6,6 +6,9 @@
 {% block content %}
 
 <h3 class="text-center">Dashboard</h3>
-
+{% if user.is_authenticated %}
 {% thought_form %}
+{% else %}
+<h4><strong>Please Login or Sign Up to access.</strong></h4>
+{% endif %}
 {% endblock %}

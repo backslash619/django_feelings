@@ -1,12 +1,10 @@
 from django.contrib.auth import logout
-from django.http import HttpResponseRedirect
-from django.shortcuts import render
-from django.core.urlresolvers import reverse, reverse_lazy
 from django.contrib.auth.forms import UserCreationForm
+from django.core.urlresolvers import reverse_lazy
+from django.shortcuts import render
 from django.views.generic import CreateView
 
 
-# Create your views here.
 def dashboard(request):
     return render(request, 'users/dashboard.html')
 
