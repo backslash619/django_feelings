@@ -3,16 +3,19 @@
 {% load static from staticfiles %}
 {% block title %}Dashboard| {{ block.super }} {% endblock %}
 
+{% block css %}
+<link href="{% static 'js/chartist/chartist.min.css'%}" rel="stylesheet">
+{% endblock %}
 {% block content %}
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-6">
             <h4><strong>Recent thoughts</strong></h4>
             <hr>
             <div class="list-group">
                 {% for thought in user.thoughts.all %}
                 <div class="list-group-item" style="margin-top:5px;">
-                    <h5><strong>{{ thought.get_condition_display }}</strong></h5>
+                    <h5><strong>{{ thought.get_condition_display }} {{ thought.condition}}</strong></h5>
                     <time class="float-right small" datetime="{{ thought.recorded_at }}">
                         {{ thought.recorded_at|date:"SHORT_DATE_FORMAT" }}
                     </time>
@@ -25,9 +28,10 @@
                 {% endfor %}
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-6">
             {% if user.is_authenticated %}
             {% thought_form %}
+            <div class="ct-chart ct-perfect-fourth" style="margin-left:-30px; margin-top:15px;"></div>
             {% else %}
             <h4><strong>Please Login or Sign Up to access.</strong></h4>
             {% endif %}
@@ -37,4 +41,19 @@
 {% endblock %}
 {% block js %}
 <script src="{% static 'js/stretchy.js' %}" data-filter="#id_notes" async></script>
+<script src="{% static 'js/chartist/chartist.min.js' %}"></script>
+<!--<script src="{% static 'js/my_charts.js' %}"></script>-->
+<script>
+{% chart_data as data %}
+
+var data = {{ data|safe }};
+var options = {
+  width: 600,
+  height: 250
+};
+new Chartist.Line('.ct-chart', data,options);
+
+
+
+</script>
 {% endblock %}
