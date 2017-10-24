@@ -15,13 +15,13 @@
             <div class="list-group">
                 {% for thought in user.thoughts.all %}
                 <div class="list-group-item" style="margin-top:5px;">
-                    <h5><strong>{{ thought.get_condition_display }} {{ thought.condition}}</strong></h5>
+                    <h5><strong>{{ thought.get_condition_display }}</strong></h5>
                     <time class="float-right small" datetime="{{ thought.recorded_at }}">
-                        {{ thought.recorded_at|date:"SHORT_DATE_FORMAT" }}
+                        posted_on: {{ thought.recorded_at|date:"SHORT_DATE_FORMAT" }}
                     </time>
                     <hr>
                     {% if thought.notes %}
-                    <p>{{ thought.notes|linebreaks }}</p>
+                    <p>{{ thought.notes|truncatewords:10}}... <a href="#">read</a></p>
                     {% endif %}
                     <small class="float-right">posted_by: {{ user }}</small>
                 </div>
