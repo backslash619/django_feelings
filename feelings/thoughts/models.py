@@ -34,7 +34,8 @@ class Thought(models.Model):
     notes = models.TextField(default='', blank=True)
 
     def __str__(self):
-        return "{} : {}".format(self.recorded_at.strftime('%Y-%m-%d %H:%H:%S'), self.get_condition_display())
+        return "{} : {} : {} ".format(self.recorded_at.strftime('%Y-%m-%d %H:%H:%S'), self.get_condition_display(),
+                                      self.user)
 
     class Meta:
         ordering = ['-recorded_at', ]

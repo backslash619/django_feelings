@@ -11,7 +11,7 @@ class Group(models.Model):
     description = models.TextField(default="", max_length=255)
 
     def __str__(self):
-        pass
+        return "{}".format(self.name)
 
     class Meta:
         abstract = True

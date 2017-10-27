@@ -1,0 +1,10 @@
+1. create project feelings
+2. made an app for user to maintain the authentications and made the dashboard for user interaction
+3. Dashboard : we want the user to record the how he/she is feeling at that time and after that the graph shows the
+    curve for the past week what are the ups and downs the user had.
+4. For user authentication we made the login and singnup page.
+5. for thoughts or feeling of the we made an seperate applications to maintain all the thoughts
+6. now if user wants to check how his/her near ones are feeling we made groups for that Eg : Company and Family group to
+    join and create the group as admin and add the other user to join and check out how the other are doing in their
+    past week/month/year.
+7. created a seprate app for group Company and family

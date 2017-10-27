@@ -31,6 +31,8 @@
         <div class="col-md-6">
             {% if user.is_authenticated %}
             {% thought_form %}
+            <h6 style="margin-top:15px;"><strong>Ups and downs in the past week.</strong></h6>
+            <hr>
             <div class="ct-chart ct-perfect-fourth" style="margin-left:-30px; margin-top:15px;"></div>
             {% else %}
             <h4><strong>Please Login or Sign Up to access.</strong></h4>
@@ -49,7 +51,7 @@
 var data = {{ data|safe }};
 var options = {
   width: 600,
-  height: 250
+  height: 500
 };
 new Chartist.Line('.ct-chart', data,options);
 
