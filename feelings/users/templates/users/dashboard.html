@@ -13,7 +13,7 @@
             <h4><strong>Recent thoughts</strong></h4>
             <hr>
             <div class="list-group">
-                {% for thought in user.thoughts.all %}
+                {% for thought in user.thoughts.all|slice:":4" %}
                 <div class="list-group-item" style="margin-top:5px;">
                     <h5><strong>{{ thought.get_condition_display }}</strong></h5>
                     <time class="float-right small" datetime="{{ thought.recorded_at }}">
@@ -31,12 +31,29 @@
         <div class="col-md-6">
             {% if user.is_authenticated %}
             {% thought_form %}
-            <h6 style="margin-top:15px;"><strong>Ups and downs in the past week.</strong></h6>
+            <h6 style="margin-top:15px;"><strong>Groups < you've joined > </strong></h6>
             <hr>
-            <div class="ct-chart ct-perfect-fourth" style="margin-left:-30px; margin-top:15px;"></div>
+            <div class="list-group">
+                <h6 style="margin-top:15px;">Company Groups</h6>
+                {{ object.name }}
+                {% for company in user.companies.all %}
+                <a href="{% url 'groups:companies:detail' slug=company.slug %}"
+                   class="list-group-item list-group-item-action">{{ company }}</a>
+                {% endfor %}
+                <hr>
+            </div>
             {% else %}
             <h4><strong>Please Login or Sign Up to access.</strong></h4>
             {% endif %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <h6 style="margin-top:15px;"><strong>Ups and downs in the past week.</strong></h6>
+            <hr>
+            <div class="ct-chart ct-perfect-fourth" style="margin-left:-30px; margin-top:15px;"></div>
+        </div>
+        <div class="col-md-6">
         </div>
     </div>
 </div>
@@ -53,7 +70,11 @@ var options = {
   width: 600,
   height: 500
 };
-new Chartist.Line('.ct-chart', data,options);
+new Chartist.Line('.ct-chart', data);
+
+
+
+
 
 
 

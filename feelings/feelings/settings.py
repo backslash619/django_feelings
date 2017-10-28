@@ -38,6 +38,7 @@ INSTALLED_APPS = (
 
     'thoughts',
     'users',
+    'groups',
     'bootstrap3',
 
 )
