@@ -11,7 +11,6 @@
             <hr>
             {% if user == object.created_by %}
             <a href="{% url 'groups:companies:update' slug=object.slug %}" class="btn btn-primary btn-sm">Edit</a>
-
             {% else %}
             <small>Sorry you can't edit as you are a member.</small>
             {% endif %}

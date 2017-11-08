@@ -29,16 +29,22 @@
             </div>
         </div>
         <div class="col-md-6">
+
             {% if user.is_authenticated %}
+            <!--this is the form to record the current emotion -->
             {% thought_form %}
-            <h6 style="margin-top:15px;"><strong>Groups < you've joined > </strong></h6>
+            <h6 style="margin-top:15px;"><strong>Groups</strong>
+                <a href="{% url 'groups:companies:create' %}" style="float:right;" class="btn btn-sm btn-primary">
+                    create
+                </a>
+            </h6>
             <hr>
             <div class="list-group">
                 <h6 style="margin-top:15px;">Company Groups</h6>
-                {{ object.name }}
                 {% for company in user.companies.all %}
                 <a href="{% url 'groups:companies:detail' slug=company.slug %}"
-                   class="list-group-item list-group-item-action">{{ company }}</a>
+                   class="list-group-item list-group-item-action">{{ company }}
+                </a>
                 {% endfor %}
                 <hr>
             </div>
@@ -71,10 +77,6 @@ var options = {
   height: 500
 };
 new Chartist.Line('.ct-chart', data);
-
-
-
-
 
 
 

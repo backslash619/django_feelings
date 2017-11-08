@@ -7,9 +7,10 @@ from .. import forms
 
 
 class CreateView(LoginRequiredMixin,
+                 SetHeadlineMixin,
                  generic.CreateView):
     form_class = forms.CompanyForm
-    headline = "Create Company"
+    headline = "Create New Company Group"
     success_url = reverse_lazy('users:dashboard')
     template_name = 'groups/companies/company_form.html'
 
@@ -35,6 +36,7 @@ class UpdateView(LoginRequiredMixin,
 
 
 class DetailView(LoginRequiredMixin,
+                 SetHeadlineMixin,
                  generic.DetailView):
     form_class = forms.CompanyForm
     template_name = 'groups/companies/__detail.html'
@@ -42,3 +44,6 @@ class DetailView(LoginRequiredMixin,
 
     def get_queryset(self):
         return self.request.user.companies.all()
+
+    def get_headline(self):
+        return 'Detail'
