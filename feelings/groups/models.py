@@ -9,7 +9,7 @@ class Group(models.Model):
     # just adds the class name for the the created by field
     created_by = models.ForeignKey(User, related_name="%(class)s_created")
     name = models.CharField(max_length=255)
-    slug = AutoSlugField(populate_from="name")
+    slug = AutoSlugField(populate_from="name", unique=True)
     description = models.TextField(default="", max_length=255)
 
     def __str__(self):

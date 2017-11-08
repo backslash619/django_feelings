@@ -13,7 +13,7 @@
             <h4><strong>Recent thoughts</strong></h4>
             <hr>
             <div class="list-group">
-                {% for thought in user.thoughts.all|slice:":4" %}
+                {% for thought in user.thoughts.all|slice:":2" %}
                 <div class="list-group-item" style="margin-top:5px;">
                     <h5><strong>{{ thought.get_condition_display }}</strong></h5>
                     <time class="float-right small" datetime="{{ thought.recorded_at }}">
@@ -29,21 +29,49 @@
             </div>
         </div>
         <div class="col-md-6">
-
             {% if user.is_authenticated %}
             <!--this is the form to record the current emotion -->
             {% thought_form %}
-            <h6 style="margin-top:15px;"><strong>Groups</strong>
-                <a href="{% url 'groups:companies:create' %}" style="float:right;" class="btn btn-sm btn-primary">
-                    create
-                </a>
-            </h6>
-            <hr>
+            {% endif %}
+        </div>
+    </div>
+    <h6 style="margin-top:15px;">
+        <strong>Groups</strong>
+        <hr>
+    </h6>
+    <div class="row">
+        <div class="col-md-6">
+            {% if user.is_authenticated %}
             <div class="list-group">
-                <h6 style="margin-top:15px;">Company Groups</h6>
+                <h6 style="margin-top:15px;">Company Groups
+                    <a href="{% url 'groups:companies:create' %}" style="float:right; padding:2.5px;"
+                       class="btn btn-sm btn-primary">
+                        create
+                    </a>
+                </h6>
                 {% for company in user.companies.all %}
                 <a href="{% url 'groups:companies:detail' slug=company.slug %}"
                    class="list-group-item list-group-item-action">{{ company }}
+                </a>
+                {% endfor %}
+                <hr>
+            </div>
+            {% else %}
+            <h4><strong>Please Login or Sign Up to access.</strong></h4>
+            {% endif %}
+        </div>
+        <div class="col-md-6">
+            {% if user.is_authenticated %}
+            <div class="list-group">
+                <h6 style="margin-top:15px;">Family Groups
+                    <a href="{% url 'groups:families:create' %}" style="float:right; padding:2.5px;"
+                       class="btn btn-sm btn-primary">
+                        create
+                    </a>
+                </h6>
+                {% for family in user.families.all %}
+                <a href="{% url 'groups:families:detail' slug=family.slug %}"
+                   class="list-group-item list-group-item-action">{{ family }}
                 </a>
                 {% endfor %}
                 <hr>
@@ -58,8 +86,6 @@
             <h6 style="margin-top:15px;"><strong>Ups and downs in the past week.</strong></h6>
             <hr>
             <div class="ct-chart ct-perfect-fourth" style="margin-left:-30px; margin-top:15px;"></div>
-        </div>
-        <div class="col-md-6">
         </div>
     </div>
 </div>
@@ -77,6 +103,14 @@ var options = {
   height: 500
 };
 new Chartist.Line('.ct-chart', data);
+
+
+
+
+
+
+
+
 
 
 

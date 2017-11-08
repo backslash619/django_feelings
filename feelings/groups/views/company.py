@@ -1,6 +1,6 @@
 from braces.views import LoginRequiredMixin
 from  braces.views import SetHeadlineMixin
-from django.core.urlresolvers import reverse_lazy
+from django.core.urlresolvers import reverse_lazy, reverse
 from django.views import generic
 
 from .. import forms
@@ -12,7 +12,7 @@ class CreateView(LoginRequiredMixin,
     form_class = forms.CompanyForm
     headline = "Create New Company Group"
     success_url = reverse_lazy('users:dashboard')
-    template_name = 'groups/companies/company_form.html'
+    template_name = 'groups/companies/_form.html'
 
     def form_valid(self, form):
         form.instance.created_by = self.request.user
@@ -25,7 +25,7 @@ class UpdateView(LoginRequiredMixin,
                  SetHeadlineMixin,
                  generic.UpdateView):
     form_class = forms.CompanyForm
-    template_name = 'groups/companies/company_form.html'
+    template_name = 'groups/companies/_form.html'
     success_url = reverse_lazy('users:dashboard')
 
     def get_queryset(self):
@@ -34,16 +34,21 @@ class UpdateView(LoginRequiredMixin,
     def get_headline(self):
         return 'Edit - {}'.format(self.object.name)
 
+    def get_success_url(self):
+        return reverse('groups:companies:detail', kwargs={
+            'slug': self.object.slug
+        })
+
 
 class DetailView(LoginRequiredMixin,
                  SetHeadlineMixin,
                  generic.DetailView):
     form_class = forms.CompanyForm
-    template_name = 'groups/companies/__detail.html'
+    template_name = 'groups/companies/_detail.html'
     success_url = reverse_lazy('users:dashboard')
 
     def get_queryset(self):
         return self.request.user.companies.all()
 
     def get_headline(self):
-        return 'Detail'
+        return 'Detail - {}'.format(self.object.name)
