@@ -21,9 +21,9 @@
             <span class="list-group-item ">
                 {{ member }}
                 {% if not member == object.created_by %}
-                <small><span class="pull-right"> -- Member</span></small>
+                <i class="fa fa-star-o" aria-hidden="true"></i>
                 {% else %}
-                <small><span class="pull-right "> -- Owner </span></small>
+                <i class="fa fa-star" aria-hidden="true"></i>
                 {% endif %}
             </span>
             {% endfor %}
